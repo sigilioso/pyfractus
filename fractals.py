@@ -1,5 +1,7 @@
 # -.- coding utf-8 -.-
 
+#fractals: some functios to draw fractals representations
+
 def in_mandelbrot(c=complex(0.7,1.5), maxIt=100):
 	"""
 	Determine if a complex number c is in the Mandelbrot set for a maximum 

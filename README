@@ -1,0 +1,9 @@
+pyfractus: a python implementation of fractus
+
+Author: Christian Felipe Álvarez
+
+TODO:
+- Sierpinski and T-Square
+- Threads
+- User interaction
+- ...
