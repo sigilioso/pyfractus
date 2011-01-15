@@ -1,6 +1,16 @@
 # -*- coding: utf-8 -*-
 
 def color(pixel, colour='blue', increment=90):
+	"""
+	Defines the color of a pixel depending on the distance from the point 
+	to the set. The procedure to color the pixel is de following:
+	The pixel correspondig to points in the set are painted black (value is 0),
+	but if the the pixel is not in the set its colors is darker when its further
+	from the set.
+	colour: red, green, blue or gray.
+	increment: the amount of the colour selected to increase to when seting the
+	colour.
+	"""
 	indexes = dict(red=(0,), green=(1,), blue=(2,), gray=(0,1,2))
 	for i in indexes[colour]:
 		if pixel[i] != 0: pixel[i] = pixel[i] + increment \
