@@ -1,30 +1,21 @@
 # -*- coding: utf-8 -*-
 
 import fractals
+import colors
 import png
 
 # Test File
 
-def color_pixel(it, maxIt):
-	"""
-	Defines the color of a pixel depending on the distance to the set
-	"""
-	if it == maxIt:
-		return 0
-	else:
-		return 255 * it / maxIt
+width = 1600	
+height = 1200
+maxIt = 150
 
-width = 800
-height = 600
-
-elems = fractals.mandelbrot(-2.5-1.5j, 1.5+1.5j, width, height, 250)
+elems = fractals.mandelbrot(-2.5-1.5j, 1.5+1.5j, width, height, maxIt)
 img = []
 for row in elems:
 	rowImg = ()
-	for elem in row:
-		rowImg += (color_pixel(elem,250), 
-				color_pixel(elem,250), 
-				color_pixel(elem,250))
+	for p in row: 
+		rowImg += colors.color_pixels(p, maxIt, 'red')
 	img.append(rowImg)
 
 f = open('mandel.png', 'wb')

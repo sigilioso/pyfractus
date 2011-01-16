@@ -1,6 +1,10 @@
 # -.- coding utf-8 -.-
 
-#fractals: some functios to draw fractals representations
+#
+# fractals.py: some functios to draw fractals representations
+#
+# Author: Christian Felipe Álvarez <sigilioso@gmail.com>
+#
 
 def in_mandelbrot(c=complex(0.7,1.5), maxIt=100):
 	"""
