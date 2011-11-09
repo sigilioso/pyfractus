@@ -6,15 +6,15 @@ import png
 
 # Test File
 
-width = 1600	
-height = 1200
+width = 800
+height = 600
 maxIt = 150
 
 elems = fractals.mandelbrot(-2.5-1.5j, 1.5+1.5j, width, height, maxIt)
 img = []
 for row in elems:
 	rowImg = ()
-	for p in row: 
+	for p in row:
 		rowImg += colors.color_pixels(p, maxIt, 'red')
 	img.append(rowImg)
 

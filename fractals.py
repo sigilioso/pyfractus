@@ -1,4 +1,4 @@
-# -.- coding utf-8 -.-
+# -.- coding: utf-8 -.-
 
 #
 # fractals.py: some functios to draw fractals representations
@@ -8,10 +8,10 @@
 
 def in_mandelbrot(c=complex(0.7,1.5), maxIt=100):
 	"""
-	Determine if a complex number c is in the Mandelbrot set for a maximum 
+	Determine if a complex number c is in the Mandelbrot set for a maximum
 	number of iterations.
-	Return max_it if c is in the Mandelbrot set, and returns the number of 
-	iterations needed to discover that c is not in the Mandelbrot set otherwise. 
+	Return max_it if c is in the Mandelbrot set, and returns the number of
+	iterations needed to discover that c is not in the Mandelbrot set otherwise.
 	"""
 	z = complex(0, 0)
 	for i in range(0, maxIt):
@@ -26,7 +26,7 @@ def in_julia(z=complex(0,0), c=complex(0.742,0.1), exp=2, maxIt=100):
 	"""
 	Determine if a complex number z is in the Julia J(c) set for a maximum number
 	of iterations. J(c) --> z' = z^exp + c
-	Returns max_it if c is in this Julia set, and returns the number of 
+	Returns max_it if c is in this Julia set, and returns the number of
 	iterations needed to discover that c is not in J(c) set otherwise.
 	"""
 	for i in range(0, maxIt):
@@ -38,13 +38,13 @@ def in_julia(z=complex(0,0), c=complex(0.742,0.1), exp=2, maxIt=100):
 
 def increment(length, minimun, maximun):
 	"""
-	Returns the dinstance between maximun and minimun 
+	Returns the dinstance between maximun and minimun
 	"""
 	return (maximun - minimun) / length
 
 def mandelbrot(minimun, maximun, width, height, maxIt):
 	"""
-	Get a table representation of a Mandelbrot set whose size is 
+	Get a table representation of a Mandelbrot set whose size is
 	width x height.
 	minimun and maximun are, respectively, the minimun and maximun complex
 	numbers that are represented (minimun in the bottom-left and maximun in
@@ -57,7 +57,7 @@ def mandelbrot(minimun, maximun, width, height, maxIt):
 	cw = minimun.real
 
 	imag = []
-	
+
 	for w in range(height):
 		row = []
 		for h in range(width):
@@ -70,7 +70,7 @@ def mandelbrot(minimun, maximun, width, height, maxIt):
 
 def julia(c, exp, minimun, maximun, width, height, maxIt):
 	"""
-	Get a table representation of a Julia (J(c) for exp exponent) set 
+	Get a table representation of a Julia (J(c) for exp exponent) set
 	whose size is width x height.
 	minimun and maximun are, respectively, the minimun and maximun complex
 	numbers that are represented (minimun in the bottom-left and maximun in
@@ -83,7 +83,7 @@ def julia(c, exp, minimun, maximun, width, height, maxIt):
 	cw = minimun.real
 
 	imag = []
-	
+
 	for w in range(height):
 		row = []
 		for h in range(width):
