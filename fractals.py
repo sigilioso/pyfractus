@@ -1,6 +1,8 @@
 # -.- coding: utf-8 -.-
 
-from multiprocessing import Process, Manager
+from multiprocessing import Process
+from multiprocessing.sharedctypes import Value
+from ctypes import c_double
 # TODO Actually use multiprocessing
 
 #
@@ -19,7 +21,7 @@ class Fractals:
         proccesses that are going to be used to create fractals.
         num_procs: default=1, a number in [1, 2, ..., 20] is required.
         """
-        self.numThreads = num_procs
+        self.num_procs = num_procs
         if num_procs < 1 or num_procs > 20:
             raise NameError("""Value not valid
                     num_procs has to be in [1, 2, ..., 20]""")
@@ -70,8 +72,8 @@ class Fractals:
         inc_real = self.__increment(width, minimun.real, maximun.real)
         inc_imag = self.__increment(height, minimun.imag, maximun.imag)
 
-        #Use this function to calculate some colums with each thread
-        def calculate_colums(num_procs=1, id_proc=0):
+        #Use this function to calculate some colums with each process
+        def calculate(image, num_procs=1, id_proc=0):
             """
             Each process has to calculate some colums, for example if there is
             two process:
@@ -80,26 +82,34 @@ class Fractals:
             """
             ch = minimun.imag
             cw = minimun.real
-            imag = []
             ch += id_proc*inc_imag
-            for w in range(height):
-                row = []
+            for w in range(id_proc, height, num_procs):
                 for h in range(width):
-                    row.append(self.in_mandelbrot(complex(cw,ch),max_it))
+                    image[w][h] = self.in_mandelbrot(c=complex(cw, ch), max_it=max_it)
                     cw += inc_real
-                imag.append(row)
-                ch += num_procs*inc_imag
+                ch += num_procs * inc_imag
                 cw = minimun.real
-            return imag
 
-        imag = []
+        # Create the image as a c_double table
+        Image = (c_double * width) * height
+        # Use shared memory to store the image
+        image = Value(Image)
+
+        # Use processes to do calculations
         if self.num_procs == 1:
-            imag = calculate_colums()
+            calculate(image)
         else:
-            pass #TODO call calculate_colums to get the colums
+            processes = []
+            for id in range(self.num_procs):
+                processes.append(Process(target=calculate,
+                    args=(image, self.num_procs, id)))
+                processes[-1].start()
+            for p in processes:
+                if p.is_alive():
+                    p.join()
 
-        #TODO join the colums to get the image and return it
-        return imag
+        # Get the image values as a double list
+        return map(list, list(image))
 
     def julia(self, c, exp, minimun, maximun, width, height, max_it):
         """

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-import fractals
+from fractals import Fractals
 import colors
 import png
 
@@ -9,6 +9,8 @@ import png
 width = 800
 height = 600
 maxIt = 150
+
+fractals = Fractals(num_procs=2)
 
 elems = fractals.mandelbrot(-2.5-1.5j, 1.5+1.5j, width, height, maxIt)
 img = []
