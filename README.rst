@@ -11,4 +11,3 @@ A python implementation of fractus (fractals generator)
 - Sierpinski and T-Square
 - Multiprocessing
 - User interaction
-- ...
